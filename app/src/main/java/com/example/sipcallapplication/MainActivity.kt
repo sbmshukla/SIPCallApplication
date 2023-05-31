@@ -315,6 +315,16 @@ class MainActivity : AppCompatActivity() {
      */
 
     private fun createIncomingNotification(rootView: View?, caller: String, state: String) {
+        val myIntent = Intent(this@MainActivity, MainActivity::class.java)
+
+        val pendingIntent = PendingIntent.getActivity(
+            this@MainActivity,
+            0,
+            myIntent,
+            PendingIntent.FLAG_IMMUTABLE
+        )
+
+
         incomingCallNotificationManager =
             getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         val mBuilder: NotificationCompat.Builder = NotificationCompat.Builder(
@@ -324,7 +334,8 @@ class MainActivity : AppCompatActivity() {
             .setSmallIcon(R.drawable.ic_call).setPriority(NotificationCompat.PRIORITY_HIGH)
             .setCategory(
                 NotificationCompat.CATEGORY_CALL
-            ).setAutoCancel(false).setOngoing(true)
+            ).setAutoCancel(false).setOngoing(true).setContentIntent(pendingIntent)
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val importance = NotificationManager.IMPORTANCE_HIGH
             val notificationChannel = NotificationChannel(
