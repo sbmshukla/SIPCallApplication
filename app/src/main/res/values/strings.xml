@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">SIPCallApplication</string>
+
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="udp">UDP</string>
+    <string name="tcp">TCP</string>
+    <string name="tls">TLS</string>
+    <string name="password">Password</string>
+    <string name="sip_domain">Sip Domain</string>
+    <string name="username">Username</string>
+    <string name="login">Login</string>
+    <string name="remote_address">Remote SIP address</string>
+    <string name="customnotificationtitle">Notification</string>
+    <string name="customnotificationtext">Incoming Call</string>
+
+</resources>

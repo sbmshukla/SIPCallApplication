@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "417957714186",
+    "project_id": "sipcallapplication",
+    "storage_bucket": "sipcallapplication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:417957714186:android:c575d755ad91a7470902f3",
+        "android_client_info": {
+          "package_name": "com.example.sipcallapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "417957714186-7sv4lg530d5heldn8q65vd4n1eefqjul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWBM0PnFaNFdYqTlmM4U--Bq3beovqetI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "417957714186-7sv4lg530d5heldn8q65vd4n1eefqjul.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
