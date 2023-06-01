@@ -473,7 +473,7 @@ class MainActivity : AppCompatActivity() {
         // Call process can be followed in onCallStateChanged callback from core listener
     }
 
-    private fun hangUp() {
+    public fun hangUp() {
         if (core.callsNb == 0) return
 
         // If the call state isn't paused, we can get it using core.currentCall

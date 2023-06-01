@@ -28,7 +28,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/username"
                 android:inputType="text"
-                android:text="8128618176" />
+                android:text="@string/_8128618176"
+                android:autofillHints="mobile" />
 
             <EditText
                 android:id="@+id/password"
@@ -36,7 +37,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/password"
                 android:inputType="textPassword"
-                android:text="123456789" />
+                android:text="@string/_123456789"
+                android:autofillHints="password" />
 
             <EditText
                 android:id="@+id/domain"
@@ -44,7 +46,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/sip_domain"
                 android:inputType="text"
-                android:text="sip.linphone.org" />
+                android:text="@string/sip_linphone_org"
+                android:autofillHints="domain" />
 
             <RadioGroup
                 android:id="@+id/rg_network"
@@ -107,7 +110,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/remote_address"
                 android:inputType="text"
-                android:layout_margin="20dp"/>
+                android:layout_margin="20dp"
+                android:autofillHints="" />
 
             <LinearLayout
                 android:id="@+id/ll_incoming"
@@ -122,28 +126,32 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/baseline_call_50" />
+                    android:src="@drawable/baseline_call_50"
+                    android:contentDescription="@string/todo" />
 
                 <ImageView
                     android:id="@+id/incoming_mute_mic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/baseline_mic_50"/>
+                    android:src="@drawable/baseline_mic_50"
+                    android:contentDescription="@string/todo" />
 
                 <ImageView
                     android:id="@+id/incoming_toggle_speaker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/baseline_volume_off_50"/>
+                    android:src="@drawable/baseline_volume_off_50"
+                    android:contentDescription="@string/todo" />
 
                 <ImageView
                     android:id="@+id/incoming_hang_up"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/baseline_call_end_50"/>
+                    android:src="@drawable/baseline_call_end_50"
+                    android:contentDescription="@string/todo" />
 
             </LinearLayout>
 
@@ -159,21 +167,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/baseline_call_50" />
+                    android:src="@drawable/baseline_call_50"
+                    android:contentDescription="@string/todo" />
 
                 <ImageView
                     android:id="@+id/outgoing_pause"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/baseline_resume_50"/>
+                    android:src="@drawable/baseline_resume_50"
+                    android:contentDescription="@string/todo" />
 
                 <ImageView
                     android:id="@+id/outgoing_hang_up"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/baseline_call_end_50"/>
+                    android:src="@drawable/baseline_call_end_50"
+                    android:contentDescription="@string/todo" />
 
             </LinearLayout>
 

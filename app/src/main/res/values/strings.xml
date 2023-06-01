@@ -18,5 +18,9 @@
     <string name="answer">Answer</string>
     <string name="sip_caller_id">8128618176@sip.linphone.org</string>
     <string name="incoming_call">Incoming Call...</string>
+    <string name="sip_linphone_org">sip.linphone.org</string>
+    <string name="_123456789">123456789</string>
+    <string name="_8128618176">8128618176</string>
+    <string name="todo">TODO</string>
 
 </resources>

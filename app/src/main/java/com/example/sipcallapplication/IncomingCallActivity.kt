@@ -13,7 +13,7 @@ class IncomingCallActivity : AppCompatActivity() {
 
 
     var sipCallerId: String? = null
-
+    val mainActivity = MainActivity()
 
     lateinit var binding: ActivityIncomingCallBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,14 +31,14 @@ class IncomingCallActivity : AppCompatActivity() {
             // ...
         }
 
-        val mainActivity = MainActivity()
+
 
         binding.apply {
             idSipId.text = sipCallerId
 
             btnDecline.setOnClickListener {
 
-//               mainActivity.hangUp()
+               mainActivity.hangUp()
 
             }
 
