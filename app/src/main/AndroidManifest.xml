@@ -4,8 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:allowBackup="true"
@@ -18,38 +18,39 @@
         android:theme="@style/Theme.SIPCallApplication"
         tools:targetApi="33">
         <activity
+            android:name=".IncomingCallActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-
-
-        <!-- The following isn't mandatory but having a foreground service prevents Android to kill the app during a call -->
+        </activity> <!-- The following isn't mandatory but having a foreground service prevents Android to kill the app during a call -->
         <!-- You can create your own service that inherits from this class for simplicity or handle the foreground service yourself -->
-        <service android:name="org.linphone.core.tools.service.CoreService"
+        <service
+            android:name="org.linphone.core.tools.service.CoreService"
             android:foregroundServiceType="phoneCall|camera|microphone"
-            android:stopWithTask="false" />
-
-        <!-- The following is mandatory to have our SDK to handle push automatically -->
-        <service android:name="org.linphone.core.tools.firebase.FirebaseMessaging"
+            android:stopWithTask="false" /> <!-- The following is mandatory to have our SDK to handle push automatically -->
+        <service
+            android:name="org.linphone.core.tools.firebase.FirebaseMessaging"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </service>
-
-        <!-- This is to handle the PUSH_RECEIVED broadcast emitted by our SDK upon push reception -->
-        <receiver android:name=".PushBroadcastReceiver"
+        </service> <!-- This is to handle the PUSH_RECEIVED broadcast emitted by our SDK upon push reception -->
+        <receiver
+            android:name=".PushBroadcastReceiver"
             android:exported="false">
             <intent-filter>
-                <action android:name="org.linphone.core.action.PUSH_RECEIVED"/>
+                <action android:name="org.linphone.core.action.PUSH_RECEIVED" />
             </intent-filter>
         </receiver>
-
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

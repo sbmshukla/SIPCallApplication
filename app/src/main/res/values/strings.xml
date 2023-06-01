@@ -14,5 +14,9 @@
     <string name="remote_address">Remote SIP address</string>
     <string name="customnotificationtitle">Notification</string>
     <string name="customnotificationtext">Incoming Call</string>
+    <string name="decline">Decline</string>
+    <string name="answer">Answer</string>
+    <string name="sip_caller_id">8128618176@sip.linphone.org</string>
+    <string name="incoming_call">Incoming Call...</string>
 
 </resources>

@@ -10,4 +10,7 @@
 
     <color name="primary">#0C46D3</color>
 
+
+    <color name="call_bg">#143441</color>
+
 </resources>

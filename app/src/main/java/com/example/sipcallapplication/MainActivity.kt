@@ -48,19 +48,23 @@ class MainActivity : AppCompatActivity() {
 
 //    var incomingCallReceived:Boolean=false
 
-    private lateinit var core: Core
+    public lateinit var core: Core
 
     lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         // Awake Screen
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         // We will need the RECORD_AUDIO permission for video call
-        if (packageManager.checkPermission(Manifest.permission.RECORD_AUDIO, packageName) != PackageManager.PERMISSION_GRANTED) {
+        if (packageManager.checkPermission(
+                Manifest.permission.RECORD_AUDIO,
+                packageName
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), 0)
             return
         }
@@ -81,7 +85,7 @@ class MainActivity : AppCompatActivity() {
             core.currentCall?.terminate()
         }
 
-       binding.incomingAnswer.setOnClickListener {
+        binding.incomingAnswer.setOnClickListener {
             // if we wanted, we could create a CallParams object
             // and answer using this object to make changes to the call configuration
             // (see OutgoingCall tutorial)
@@ -142,7 +146,8 @@ class MainActivity : AppCompatActivity() {
             R.id.rb_tls -> TransportType.Tls
             else -> TransportType.Tls
         }
-        val authInfo = Factory.instance().createAuthInfo(username, null, password, null, null, domain, null)
+        val authInfo =
+            Factory.instance().createAuthInfo(username, null, password, null, null, domain, null)
 
         val params = core.createAccountParams()
         val identity = Factory.instance().createAddress("sip:$username@$domain")
@@ -162,13 +167,19 @@ class MainActivity : AppCompatActivity() {
         core.start()
 
         if (!core.isPushNotificationAvailable) {
-            Toast.makeText(this, "Something is wrong with the push setup!", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Something is wrong with the push setup!", Toast.LENGTH_LONG)
+                .show()
         }
     }
 
-    private val coreListener = object: CoreListenerStub() {
+    private val coreListener = object : CoreListenerStub() {
 
-        override fun onAccountRegistrationStateChanged(core: Core, account: Account, state: RegistrationState?, message: String) {
+        override fun onAccountRegistrationStateChanged(
+            core: Core,
+            account: Account,
+            state: RegistrationState?,
+            message: String
+        ) {
 
             binding.tvStatus.text = message
 
@@ -176,13 +187,19 @@ class MainActivity : AppCompatActivity() {
                 RegistrationState.Failed -> {
                     Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
                 }
+
                 RegistrationState.Ok -> {
                     binding.llLogin.visibility = View.GONE
                     binding.llCalling.visibility = View.VISIBLE
                     Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
                     // This will display the push information stored in the contact URI parameters
-                    Toast.makeText(this@MainActivity, account.params.contactUriParameters, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@MainActivity,
+                        account.params.contactUriParameters,
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
+
                 RegistrationState.Progress -> {
                     Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
                 }
@@ -201,7 +218,12 @@ class MainActivity : AppCompatActivity() {
             // for example after a bluetooth headset has been connected/disconnected.
         }
 
-        override fun onCallStateChanged(core: Core, call: Call, state: Call.State?, message: String) {
+        override fun onCallStateChanged(
+            core: Core,
+            call: Call,
+            state: Call.State?,
+            message: String
+        ) {
 
             binding.callStatus.text = message
 
@@ -215,16 +237,26 @@ class MainActivity : AppCompatActivity() {
                     binding.remoteAddress.setText(call.remoteAddress.asStringUriOnly())
 
 //                    incomingCallReceived=false
-                    createIncomingNotification(window.decorView.rootView,"Incoming Call...",call.remoteAddress.asStringUriOnly())
+                    createIncomingNotification(
+                        window.decorView.rootView,
+                        "Incoming Call...",
+                        call.remoteAddress.asStringUriOnly()
+                    )
                 }
+
                 Call.State.Connected -> {
                     binding.incomingMuteMic.setImageResource(R.drawable.baseline_mic_50)
                     binding.incomingToggleSpeaker.setImageResource(R.drawable.baseline_volume_off_50)
                     removeIncomingCallNotification(window.decorView.rootView)
 
 //                    incomingCallReceived=true
-                    createOngoingNotification(window.decorView.rootView,"Call Ongoing","incoming call ongoing...")
+                    createOngoingNotification(
+                        window.decorView.rootView,
+                        "Call Ongoing",
+                        "incoming call ongoing..."
+                    )
                 }
+
                 Call.State.Released -> {
                     binding.llIncoming.visibility = View.GONE
                     binding.llOutgoing.visibility = View.VISIBLE
@@ -239,15 +271,19 @@ class MainActivity : AppCompatActivity() {
 //                    createMissedCallNotification(window.decorView.rootView,"Missed Call Received...",call.remoteAddress.asStringUriOnly())
 
                 }
+
                 Call.State.OutgoingInit -> {
                     // First state an outgoing call will go through
                 }
+
                 Call.State.OutgoingProgress -> {
                     // Right after outgoing init
                 }
+
                 Call.State.OutgoingRinging -> {
                     // This state will be reached upon reception of the 180 RINGING
                 }
+
                 Call.State.StreamsRunning -> {
                     // This state indicates the call is active.
                     // You may reach this state multiple times, for example after a pause/resume
@@ -255,22 +291,28 @@ class MainActivity : AppCompatActivity() {
                     // Wait for the call to be connected before allowing a call update
                     binding.outgoingPause.setImageResource(R.drawable.baseline_resume_50)
                 }
+
                 Call.State.Paused -> {
                     // When you put a call in pause, it will became Paused
                     binding.outgoingPause.setImageResource(R.drawable.baseline_pause_50)
                 }
+
                 Call.State.PausedByRemote -> {
                     // When the remote end of the call pauses it, it will be PausedByRemote
                 }
+
                 Call.State.Updating -> {
                     // When we request a call update, for example when toggling video
                 }
+
                 Call.State.UpdatedByRemote -> {
                     // When the remote requests a call update
                 }
+
                 Call.State.Error -> {
                     Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
                 }
+
                 else -> {}
             }
         }
@@ -315,7 +357,8 @@ class MainActivity : AppCompatActivity() {
      */
 
     private fun createIncomingNotification(rootView: View?, caller: String, state: String) {
-        val myIntent = Intent(this@MainActivity, MainActivity::class.java)
+        val myIntent = Intent(this@MainActivity, IncomingCallActivity::class.java)
+        myIntent.putExtra("sipId",state)
 
         val pendingIntent = PendingIntent.getActivity(
             this@MainActivity,
@@ -348,7 +391,10 @@ class MainActivity : AppCompatActivity() {
             incomingCallNotificationManager!!.createNotificationChannel(notificationChannel)
         }
         assert(incomingCallNotificationManager != null)
-        incomingCallNotificationManager!!.notify(System.currentTimeMillis().toInt(), mBuilder.build())
+        incomingCallNotificationManager!!.notify(
+            System.currentTimeMillis().toInt(),
+            mBuilder.build()
+        )
 
     }
 
@@ -408,7 +454,8 @@ class MainActivity : AppCompatActivity() {
         val remoteSipUri = binding.remoteAddress.text.toString()
         val uri = "sip:$remoteSipUri@${binding.domain.text}"
         val remoteAddress = Factory.instance().createAddress(uri)
-        remoteAddress ?: return // If address parsing fails, we can't continue with outgoing call process
+        remoteAddress
+            ?: return // If address parsing fails, we can't continue with outgoing call process
 
         // We also need a CallParams object
         // Create call params expects a Call object for incoming calls, but for outgoing we must use null safely
